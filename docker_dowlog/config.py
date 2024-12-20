@@ -5,7 +5,12 @@ from typing import (
 )
 from datetime import datetime
 
+from dotenv import load_dotenv
+
 from constants import SCHEDULE_TIME_FORMAT
+
+
+load_dotenv()
 
 
 class Config:
