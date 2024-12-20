@@ -26,7 +26,10 @@ class FileSaver(Saver):
     def _create_folder(self):
         path = self._config.PATH if self._config.PATH else os.getcwd()
         self._folder_path = os.path.join(path, 'logs')
-        os.mkdir(self._folder_path)
+        try:
+            os.mkdir(self._folder_path)
+        except FileExistsError:
+            return
 
     def _write_files(self):
         now = datetime.now()

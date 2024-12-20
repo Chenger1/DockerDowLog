@@ -8,14 +8,15 @@ class Main:
         self._config = Config.build_config()
         self._scheduler = Scheduler(self._config)
 
-    def save(self):
+    def start(self):
+        job = self._scheduler.get_job(self._save)
+        job.start()
+
+    def _save(self):
         containers = Docker(self._config).get_logs()
         FileSaver(self._config, containers).save()
 
 
 if __name__ == "__main__":
-    def f():
-        print("MY task")
-
     main = Main()
-    main.save()
+    main.start()
