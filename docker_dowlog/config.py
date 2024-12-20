@@ -19,6 +19,10 @@ class Config:
         self.SCHEDULE: datetime = self._parse_schedule_time()
         self.PATH: Optional[str] = self._get_common_param('FOLDER_PATH', can_be_empty=True)
 
+        # if provided, logs will be send to telegram instead of saving on disk
+        self.TELEGRAM_BOT_API_KEY = self._get_common_param('TELEGRAM_BOT_API_KEY', can_be_empty=True)
+        self.TELEGRAM_CHAT_ID = self._get_common_param('TELEGRAM_CHAT_ID', can_be_empty=True)
+
     @classmethod
     def build_config(cls) -> 'Config':
         return cls()
