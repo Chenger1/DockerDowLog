@@ -1,3 +1,5 @@
+from loguru import logger
+
 from config import Config
 from scheduler import Scheduler
 from service import Docker
@@ -17,6 +19,7 @@ class Main:
         get_saver(self._config)(self._config, containers).save()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+    logger.info(f'Start server')
     main = Main()
     main.start()

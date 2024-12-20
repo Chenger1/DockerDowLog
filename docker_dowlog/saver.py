@@ -12,6 +12,7 @@ from datetime import datetime
 from aiogram import Bot
 from aiogram.types import BufferedInputFile
 from asgiref.sync import async_to_sync
+from loguru import logger
 
 from dto import DockerLog
 from config import Config
@@ -46,6 +47,7 @@ class FileSaver(Saver):
                 f.write(log.log_text)
 
     def save(self):
+        logger.info('Save logs on disk')
         self._create_folder()
         self._write_files()
 
@@ -69,6 +71,7 @@ class TelegramSaver(Saver):
         await self._bot.session.close()
 
     def save(self):
+        logger.info('Send logs to telegram')
         for file in self._prepare_file():
             async_to_sync(self._send_message)(file)
 

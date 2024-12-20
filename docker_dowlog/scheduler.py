@@ -6,6 +6,7 @@ from abc import (
 from typing import Callable
 
 import schedule
+from loguru import logger
 
 from config import Config
 from constants import SCHEDULE_TIME_FORMAT
@@ -39,5 +40,6 @@ class Scheduler(BaseScheduler):
         return schedule.every().day.at(self._config.SCHEDULE.strftime(SCHEDULE_TIME_FORMAT)).do(task)
 
     def get_job(self, task: Callable) -> ScheduledJob:
+        logger.info('Build schedue')
         self._build(task)
         return ScheduledJob(self._wrapper)
