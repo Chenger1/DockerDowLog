@@ -7,7 +7,7 @@ from datetime import datetime
 
 from dotenv import load_dotenv
 
-from constants import SCHEDULE_TIME_FORMAT
+from docker_dowlog.domain.constants import SCHEDULE_TIME_FORMAT
 
 
 load_dotenv()

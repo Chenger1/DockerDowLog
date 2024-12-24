@@ -9,7 +9,7 @@ import schedule
 from loguru import logger
 
 from config import Config
-from constants import SCHEDULE_TIME_FORMAT
+from docker_dowlog.domain.constants import SCHEDULE_TIME_FORMAT
 
 
 class ScheduledJob:
