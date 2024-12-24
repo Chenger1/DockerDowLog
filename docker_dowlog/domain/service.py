@@ -4,7 +4,7 @@ import docker
 from docker.models.containers import Container
 
 from config import Config
-from dto import DockerLog
+from docker_dowlog.domain.dto import DockerLog
 
 
 class Docker:

@@ -1,25 +1,26 @@
-from loguru import logger
+def run_cli():
+    from loguru import logger
+    import os
+    import sys
+    import traceback
+    from pathlib import Path
 
-from config import Config
-from scheduler import Scheduler
-from service import Docker
-from saver import get_saver
+    current_path = Path(__file__).parent.parent.resolve()
+    sys.path.append(str(current_path))
 
-class Main:
-    def __init__(self):
-        self._config = Config.build_config()
-        self._scheduler = Scheduler(self._config)
-
-    def start(self):
-        job = self._scheduler.get_job(self._save)
-        job.start()
-
-    def _save(self):
-        containers = Docker(self._config).get_logs()
-        get_saver(self._config)(self._config, containers).save()
+    chosen_app = os.environ.get('DOCKER_DOWLOG_APP')
+    try:
+        match chosen_app:
+            case 'cli':
+                from docker_dowlog.cli import start_app
+                start_app()
+            case 'web':
+                raise NotImplementedError('Web app is not currently implemented')
+    except ImportError as e:
+        traceback.print_exc()
+        logger.error(f'Unable to load libraries: {e}')
+        sys.exit(1)
 
 
 if __name__ == '__main__':
-    logger.info(f'Start server')
-    main = Main()
-    main.start()
+    run_cli()

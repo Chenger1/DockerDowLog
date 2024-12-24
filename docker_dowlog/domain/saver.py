@@ -14,7 +14,7 @@ from aiogram.types import BufferedInputFile
 from asgiref.sync import async_to_sync
 from loguru import logger
 
-from dto import DockerLog
+from docker_dowlog.domain.dto import DockerLog
 from config import Config
 
 
