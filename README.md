@@ -13,6 +13,7 @@ Instructions:
     - FOLDER_PATH (Optional) - optional path where folder should be created. 
 If not specified folder will be created in current directory.
 3) Use ``python3 main.py`` command to launch script.
+4) Or use ``python3 main.py run`` to launch Litestar web application
 
 
 If you want to upload your logs to telegram instead of saving them locally:

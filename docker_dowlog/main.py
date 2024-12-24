@@ -15,7 +15,8 @@ def run_cli():
                 from docker_dowlog.cli import start_app
                 start_app()
             case 'web':
-                raise NotImplementedError('Web app is not currently implemented')
+                from docker_dowlog.web import start_app
+                app = start_app()
     except ImportError as e:
         traceback.print_exc()
         logger.error(f'Unable to load libraries: {e}')
