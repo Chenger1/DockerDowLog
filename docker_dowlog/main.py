@@ -16,7 +16,7 @@ def run_cli():
                 start_app()
             case 'web':
                 from docker_dowlog.web import start_app
-                app = start_app()
+                start_app()
     except ImportError as e:
         traceback.print_exc()
         logger.error(f'Unable to load libraries: {e}')
