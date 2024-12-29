@@ -5,6 +5,7 @@ def create_app():
     from litestar.static_files import create_static_files_router
     from litestar.contrib.jinja import JinjaTemplateEngine
     from litestar.template.config import TemplateConfig
+    from litestar.plugins.htmx import HTMXPlugin
 
     from docker_dowlog.web.routers import routers
 
@@ -22,6 +23,7 @@ def create_app():
             directory=Path(__file__).parent / 'templates',
             engine=JinjaTemplateEngine
         ),
+        plugins=[HTMXPlugin()],
         debug=True
     )
 

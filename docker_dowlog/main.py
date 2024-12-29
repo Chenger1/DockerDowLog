@@ -17,6 +17,8 @@ def run_cli():
             case 'web':
                 from docker_dowlog.web import start_app
                 start_app()
+            case _:
+                raise ValueError('Undefined app')
     except ImportError as e:
         traceback.print_exc()
         logger.error(f'Unable to load libraries: {e}')

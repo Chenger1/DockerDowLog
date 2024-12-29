@@ -4,11 +4,11 @@ from abc import (
     abstractmethod
 )
 from typing import Callable
+from datetime import datetime
 
 import schedule
 from loguru import logger
 
-from config import Config
 from docker_dowlog.domain.constants import SCHEDULE_TIME_FORMAT
 
 
@@ -21,8 +21,8 @@ class ScheduledJob:
 
 
 class BaseScheduler(ABC):
-    def __init__(self, config: Config):
-        self._config = config
+    def __init__(self, _schedule: datetime):
+        self._schedule = _schedule
 
     @abstractmethod
     def get_job(self, task: Callable) -> ScheduledJob:
@@ -37,9 +37,9 @@ class Scheduler(BaseScheduler):
             time.sleep(1)
 
     def _build(self, task: Callable) -> schedule.Job:
-        return schedule.every().day.at(self._config.SCHEDULE.strftime(SCHEDULE_TIME_FORMAT)).do(task)
+        return schedule.every().day.at(self._schedule.strftime(SCHEDULE_TIME_FORMAT)).do(task)
 
     def get_job(self, task: Callable) -> ScheduledJob:
-        logger.info('Build schedue')
+        logger.info('Build schedule')
         self._build(task)
         return ScheduledJob(self._wrapper)

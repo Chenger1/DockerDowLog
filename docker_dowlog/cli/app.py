@@ -6,12 +6,12 @@ from docker_dowlog.domain.saver import get_saver
 class App:
     def __init__(self):
         self._config = Config.build_config()
-        self._scheduler = Scheduler(self._config)
+        self._scheduler = Scheduler(self._config.SCHEDULE)
 
     def start(self):
         job = self._scheduler.get_job(self._save)
         job.start()
 
     def _save(self):
-        containers = Docker(self._config).get_logs()
+        containers = Docker().get_logs(self._config.DOCKER_CONTAINERS)
         get_saver(self._config)(self._config, containers).save()

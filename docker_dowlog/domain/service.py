@@ -1,27 +1,25 @@
-from typing import List
+from typing import Optional
 
 import docker
 from docker.models.containers import Container
 
-from config import Config
 from docker_dowlog.domain.dto import DockerLog
 
 
 class Docker:
-    def __init__(self, config: Config):
-        self._config = config
+    def __init__(self):
         self._docker_client = docker.from_env()
 
-    def _get_containers(self) -> List[Container]:
-        return [
-            container for container in self._docker_client.containers.list()
-            if container.name in self._config.DOCKER_CONTAINERS
-        ]
+    def get_containers(self, containers_names: Optional[list[str]] = None) -> list[Container]:
+        containers = self._docker_client.containers.list(all=True)
+        if containers_names:
+            return [container for container in containers if container.name in containers_names]
+        return containers
 
-    def get_logs(self) -> List[DockerLog]:
+    def get_logs(self, containers_names: Optional[list[str]] = None) -> list[DockerLog]:
         return [
             DockerLog(
                 name=container.name,
                 log_text=container.logs().decode('utf-8'),
-            ) for container in self._get_containers()
+            ) for container in self.get_containers(containers_names)
         ]

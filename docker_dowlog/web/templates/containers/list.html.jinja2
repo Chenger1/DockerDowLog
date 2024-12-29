@@ -1,5 +1,33 @@
 {% extends 'index.html.jinja2' %}
 
+{% block page_header %}
+    Containers
+{% endblock %}
+
 {% block content %}
-    Containers contents
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Name</td>
+                <th style="width: 150px;">Last Saved</th>
+                <th style="width: 100px;">Choose</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for container in containers %}
+                <tr>
+                    <td>{{ container.name }}</td>
+                    <td>Never</td>
+                    <td>Action</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">No data available</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
