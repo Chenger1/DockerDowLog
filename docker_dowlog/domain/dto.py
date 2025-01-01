@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+from datetime import datetime
+from typing import Optional
 
 
 @dataclass(frozen=True)
@@ -10,3 +12,4 @@ class DockerLog:
 @dataclass(frozen=True)
 class DockerContainer:
     name: str
+    last_updated: Optional[datetime] = None

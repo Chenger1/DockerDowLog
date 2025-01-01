@@ -10,7 +10,7 @@
             <thead>
             <tr>
                 <td>Name</td>
-                <th style="width: 150px;">Last Saved</th>
+                <th style="width: 250px;">Last Saved</th>
                 <th style="width: 100px;">Choose</th>
             </tr>
             </thead>
@@ -18,7 +18,7 @@
             {% for container in containers %}
                 <tr>
                     <td>{{ container.name }}</td>
-                    <td>Never</td>
+                    <td>{{ container.last_updated.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                     <td>Action</td>
                 </tr>
                 {% else %}
