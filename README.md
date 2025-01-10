@@ -7,7 +7,6 @@ Instructions:
 2) Create .env file and specify required variables:
     - DOCKER_DOWLOG_APP:
       * cli - if want to launch as regular python script
-      * web - if want to use web interface (UNDER DEVELOPMENT)
     - DOCKER_CONTAINERS - comma separated list of containers names
     - DOWNLOAD_LOG_SCHEDULE - time when logs should be saved to file. Supported format: 00:00
     - FOLDER_PATH (Optional) - optional path where folder should be created. 
